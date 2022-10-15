@@ -14,3 +14,11 @@ C:\Users\Janick\Documents\Gibb\iet-403\Programme\memory.local\Memory\obj\Debug\M
 C:\Users\Janick\Documents\Gibb\iet-403\Programme\memory.local\Memory\obj\Debug\Memory.csproj.CoreCompileInputs.cache
 C:\Users\Janick\Documents\Gibb\iet-403\Programme\memory.local\Memory\obj\Debug\Memory.exe
 C:\Users\Janick\Documents\Gibb\iet-403\Programme\memory.local\Memory\obj\Debug\Memory.pdb
+C:\Users\Janick\RiderProjects\memory\Memory\bin\Debug\Memory.exe.config
+C:\Users\Janick\RiderProjects\memory\Memory\bin\Debug\Memory.exe
+C:\Users\Janick\RiderProjects\memory\Memory\bin\Debug\Memory.pdb
+C:\Users\Janick\RiderProjects\memory\Memory\obj\Debug\Memory.csproj.AssemblyReference.cache
+C:\Users\Janick\RiderProjects\memory\Memory\obj\Debug\Memory.csproj.SuggestedBindingRedirects.cache
+C:\Users\Janick\RiderProjects\memory\Memory\obj\Debug\Memory.csproj.CoreCompileInputs.cache
+C:\Users\Janick\RiderProjects\memory\Memory\obj\Debug\Memory.exe
+C:\Users\Janick\RiderProjects\memory\Memory\obj\Debug\Memory.pdb
