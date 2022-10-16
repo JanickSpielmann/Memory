@@ -15,7 +15,7 @@ namespace Memory
         static void Main(string[] args)
         {
             //Variables
-            int[] size = new int[] { 2, 2 };
+            int[] size = new int[] { 3, 3 };
             size[0] = size[0] + 1; // adding size for the coordinates
             size[1] = size[1] + 1; // adding size for the coordinates
 
