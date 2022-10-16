@@ -48,5 +48,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="sounds\GoodThingsComeToAnEnd.wav" />
+    <Content Include="sounds\InTheEnd.wav" />
+    <Content Include="sounds\Skyfall.wav" />
+    <Content Include="sounds\Yeah.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
