@@ -13,13 +13,15 @@ namespace Memory
         static void Main(string[] args)
         {
             //Variables
-            int[] size = new int[] { 6, 6 };
+            int[] size = new int[] { 4, 4 };
+            size[0] = size[0] + 1; // adding size for the coordinates
+            size[1] = size[1] + 1; // adding size for the coordinates
 
 
             //Arrays
-            int [] a = new int []{0,0};
-            int [] b = new int []{0,0};
-            char[] aCard = new char[] { '☺', '☻', '♦', '♠', '♥', '♣', '♫', '☼', '©', '&', '▲', '►', '▼', '◄', '#', '§', '$', '£' };
+            int [] a = new int []{0,0}; // 1 coordinate (x,y)
+            int [] b = new int []{0,0}; // 2.coordinate (x,y)
+            char[] symbols = new char[] { '☺', '☻', '♦', '♠', '♥', '♣', '♫', '☼', '©', '&', '▲', '►', '▼', '◄', '#', '§', '$', '£','✿','✌','☁','❈','☂','☎','▣','☃'};
             char[,] blancField = new char[size[0],size[1]];
             char[,] cardField = new char[size[0],size[1]];
             Random random = new Random();
@@ -28,8 +30,7 @@ namespace Memory
            
                     
             blancField = MakeCleanArray(size);
-            cardField = MakeCleanArray(size);
-            cardField = MakeASide(size, aCard);
+            cardField = MakeASide(size, symbols);
             
            
             ShowField(cardField,size);
@@ -106,9 +107,18 @@ static void ShowField(char[,] field,int[] size)
     
     for (int i = 0; i < size[0]; i++)
     {
-        for(int j = 0; j < size[1]; j++)
+        for(int j = 0; j < size[1]+1; j++)
         {
-            Console.Write($"{field[i,j],4}");
+            if (j == size[1])
+            {
+                Console.Write($"{((char)(i+48)),4}");
+            }
+            else
+            {
+                Console.Write($"{field[i,j],4}");
+            }
+            
+            
         }
         Console.WriteLine();
         Console.WriteLine();
@@ -122,20 +132,36 @@ static char[,] MakeCleanArray(int[] size)
     {
         for(int j = 0; j < size[1]; j++)
         {
-            aArray[i, j] = '■';
+            if (i == 0)
+            {
+                aArray[i, j] = ((char) (j+48));
+            }
+
+            else if (j == 0)
+            {
+                aArray[i, j] = ((char)(i + 48));
+            }
+            else
+            {
+                aArray[i, j] = '■';
+            }
+            
         }
     }
 
     return aArray;
 }
 
+
+
 /*static char[,] MakeASide(int[] size, char[] symboles)
 {
     char[,] aArray = new char[size[0], size[1]];
+    aArray = MakeCleanArray(size);
     Random random = new Random();
-    for (int i = 0; i < size[0]; i++)
+    for (int i = 1; i < size[0]; i++)
     {
-        for (int j = 0; j < size[1]; j++)
+        for (int j = 1; j < size[1]; j++)
         {
             aArray[i, j] = symboles[random.Next(18)];
         }
@@ -143,26 +169,32 @@ static char[,] MakeCleanArray(int[] size)
 
     return aArray;
 }*/
-static char[,] MakeASide(int[] size, char[] aCard)
+static char[,] MakeASide(int[] size, char[] symbols)
 {
     char[,] aArray = new char[size[0],size[1]];
     aArray = MakeCleanArray(size);
     Random random = new Random();
-    for (int i = 0; i < aCard.Length; i++)
+    for (int i = 0; i < ((size[0] - 1) * (size[1] - 1)); i++)
     {
-        int a = random.Next(size[0]);
-        int b = random.Next(size[1]);
-        if (aArray[a, b] == '■')
+        for (int j = 0; j < 2; j++)
         {
-            aArray[a, b] = aCard[i];
-        }
-        int c = random.Next(size[0]);
-        int d = random.Next(size[1]);
-        if (aArray[c, d] == '■')
-        {
-            aArray[a, b] = aCard[i];
-        }
+
+            
+            int a = random.Next((size[0] - 1)); // x coordinate new object
+            int b = random.Next((size[1] - 1)); // y coordinate new object
+            
+            if (aArray[a + 1, b + 1] == '■')
+            {
+                aArray[a + 1, b + 1] = symbols[i];
+                
+            }
+            
+        
+
+
     }
+
+
     return aArray;
 }
 
