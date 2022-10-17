@@ -14,8 +14,13 @@ namespace Memory
         public static String path = System.IO.Path.GetFullPath(@"..\..\");
         static void Main(string[] args)
         {
+            
+            
+            //Settings
+            int[] size = new int[] { 2,6};
+            bool sound = false;
+            
             //Variables
-            int[] size = new int[] { 3, 3 };
             size[0] = size[0] + 1; // adding size for the coordinates
             size[1] = size[1] + 1; // adding size for the coordinates
 
@@ -43,7 +48,7 @@ namespace Memory
 
             while (!CheckIfFinish(blancField, size))
             {
-                blancField = playRound(blancField, cardField, size);
+                blancField = playRound(blancField, cardField, size, sound);
             }
 
 
@@ -71,19 +76,19 @@ namespace Memory
 
 
             /////////////////!!!!!!You shall not pass!!!!!////////////////
-            ThisIsTheEnd();
+            ThisIsTheEnd(sound);
             /////////////////!!!!!!You shall not pass!!!!!////////////////
         }
 
 
-        static void ThisIsTheEnd()
+        static void ThisIsTheEnd(bool sound)
         {
-            Jukebox();
+            Jukebox(sound);
 
             Console.ReadLine();
         }
 
-        private static void Jukebox()
+        private static void Jukebox(bool sound)
         {
 
             //Songs
@@ -96,24 +101,32 @@ namespace Memory
             switch (Song.Next(1, 4))
             {
                 case 1:
-                    Skyfall.Play();
+                     if(sound){Skyfall.Play();}
                     Console.WriteLine(
                         "This is the end...\nHold your breath and count to ten.\nFeel the Earth move and then.\nHear my heart burst again.\nFor this is the end.\nI've drowned and dreamt this moment.\nSo overdue, I owe them.\nSwept away, I'm stolen.\n");
                     break;
                 case 2:
-                    InTheEnd.Play();
+                    if (sound)
+                    {
+                        InTheEnd.Play();
+                    }
+
                     Console.WriteLine(
                         "I tried so hard and got so far\nBut in the end, it doesn't even matter\nI had to fall to lose it all\nBut in the end, it doesn't even matter");
                     break;
                 case 3:
+                if (sound)
+                {
                     GoodThingsComeToAnEnd.Play();
-                    Console.WriteLine(
+                }
+
+                Console.WriteLine(
                         "Flames to dust, lovers to friends\nWhy do all good things come to an end?\nFlames to dust, lovers to friends\nWhy do all good things come to an end?");
                     break;
             }
         }
 
-        /// /////////////////////////
+        /////////////////////////////
         static void ShowField(char[,] field, int[] size)
         {
             for (int i = 0; i < size[0]; i++)
@@ -200,6 +213,7 @@ namespace Memory
             {
                 number = true;
                 char[] cArray = Console.ReadLine().ToCharArray();
+                
                 iArray = new int[cArray.Length];
                 Console.WriteLine();
                 iArray[0] = cArray[0] - 48;
@@ -222,7 +236,7 @@ namespace Memory
             return iArray;
         }
 
-        public static char[,] playRound(char[,] blancField, char[,] cardField, int[] size)
+        public static char[,] playRound(char[,] blancField, char[,] cardField, int[] size,bool sound)
         {
             int[] cardA = new int[] { 0, 0 };
             int[] cardB = new int[] { 0, 0 };
@@ -230,7 +244,8 @@ namespace Memory
             
             Console.Write("please enter Coordinates (11,23) for the first card: ");
             cardA = InputCardLocation(blancField,size);
-
+            blancField[cardA[0], cardA[1]] = cardField[cardA[0], cardA[1]];
+            ShowField(blancField, size);
             do
             {
                 if ((cardA[0] == cardB[0])&&(cardA[1] == cardB[1]))
@@ -240,7 +255,6 @@ namespace Memory
                 Console.Write("please enter Coordinates (11,23) for the second card: ");
                 cardB = InputCardLocation(blancField, size);
             } while ((cardA[0] == cardB[0])&&(cardA[1] == cardB[1]));
-            blancField[cardA[0], cardA[1]] = cardField[cardA[0], cardA[1]];
             blancField[cardB[0], cardB[1]] = cardField[cardB[0], cardB[1]];
             ShowField(blancField, size);
             Console.WriteLine("-----------");
@@ -249,11 +263,20 @@ namespace Memory
                 blancField[cardA[0], cardA[1]] = '■';
                 blancField[cardB[0], cardB[1]] = '■';
                 Console.WriteLine("Try again");
+                SoundPlayer Duck = new SoundPlayer(@path + "sounds\\WhatTheDuck.wav");
+                if (sound)
+                {
+                    Duck.Play();
+                }
             }
             else
             {
                 SoundPlayer Yeah = new SoundPlayer(@path + "sounds\\Yeah.wav");
-                Yeah.Play();
+                if (sound)
+                {
+                    Yeah.Play();
+                }
+
                 Console.WriteLine("You got one! ENTER the next round");
                 Console.ReadLine();
 
